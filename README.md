@@ -43,25 +43,35 @@
 
 1. Установите все зависимости, указанные в файле requirements.txt.
 2. Запустите проект с помощью docker-compose:
-   ```docker-compose up -d```
+```
+docker-compose up -d
+```
 3. Откройте Swagger UI в браузере(используйте VPN, если вы на территории РФ):
-   ```http://localhost:8000/docs```
+```
+http://localhost:8000/docs
+```
 4. Используйте API для работы с коллекцией мемов;
 5. Используйте скрипт, который загружает все изображения из указанного каталога и генерирует CSV-файл с путями к
    изображениям и загруженными идентификаторами. Например, если вы запустили службу с помощью docker-compose,
    вы можете запустить этот скрипт с sample_images, выполнив следующую команду:
-   ```python upload_images.py --image_dir "sample_images" --csv_name "uploaded.csv" --csv_delimiter ";" --api_url "http://localhost:9000/images"```
+```
+python upload_images.py --image_dir "sample_images" --csv_name "uploaded.csv" --csv_delimiter ";" --api_url "http://localhost:9000/images"
+```
 
 ## Тестирование:
 
 1. Запустите тесты с помощью команды(предварительно перейдите в директорию tests):
-   ```pytest```
+```
+pytest
+```
 2. Проверьте, что все тесты пройдены.
 
 ## Документация:
 
 1. Swagger/OpenAPI документация доступна по адресу:
-   ```http://localhost:8000/docs```
+```
+http://localhost:8000/docs
+```
 2. Файл README.md содержит информацию о функциональности проекта и инструкции по локальному запуску для разработки.
 
 ## Скриншоты:
@@ -87,10 +97,11 @@
 временного файла(
 ``` 
 curl -X 'POST' -H 'accept: application/json' -H 'Content-Type: multipart/form-data' --data-binary "C:\Users\Roman\Desktop\3.jpg" -o "C:\Windows\Temp\uploa
-ded_file" 'http://localhost:8000/images/'``
-
+ded_file" 'http://localhost:8000/images/'
 ```
 )
+
+```
 curl -X 'POST' \
   'http://localhost:8000/images/' \
   -H 'accept: application/json' \
@@ -98,7 +109,6 @@ curl -X 'POST' \
   -F 'file=@C:/Users/Roman/Desktop/1.jpg;type=image/jpeg'
 ```
 ```
-	
 Error: Unprocessable Entity
 
 Response body
@@ -120,3 +130,4 @@ Download
   ]
 }
 ```
+
