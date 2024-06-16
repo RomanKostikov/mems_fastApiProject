@@ -1,14 +1,11 @@
-# Используем официальный базовый образ Python
-FROM python:3.10-alpine
+FROM python:3.8
 
-# Устанавливаем рабочую директорию в контейнере
-WORKDIR /app
+WORKDIR /build
 
-# Копируем файлы приложения в контейнер
-COPY . .
-
-# Устанавливаем зависимости
+COPY requirements.txt .
+COPY app/ ./app
+COPY .env .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Запускаем приложение
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+EXPOSE 8000
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,28 +1,40 @@
-version: '3'
+version: "3.8"
+
 services:
   minio:
     image: minio/minio
-    container_name: minio_server
-    environment:
-      MINIO_ROOT_USER: admin
-      MINIO_ROOT_PASSWORD: password
+    container_name: mems_minio
     ports:
       - "9000:9000"
-    volumes:
-      - ./data:/data
-    command: server /data
-
-  fastapi:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: fastapi_app
-    ports:
-      - "8000:8000"
-    depends_on:
-      - minio
+      - "9001:9001"
+    env_file:
+      - .env
     environment:
-      MINIO_ENDPOINT: http://minio:9000
-      MINIO_ACCESS_KEY: admin
-      MINIO_SECRET_KEY: password
-      MINIO_BUCKET_NAME: Roman777
+      - MINIO_ERASURE_SET_DRIVE_COUNT=1
+    volumes:
+      - minio_data:/data
+      - minio_config:/root/.minio
+    command: server --console-address ":9001" /data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+
+  api_backend:
+     build:
+       context: .
+       dockerfile: Dockerfile
+     ports:
+       - "8000:8000"
+     env_file:
+       - .env
+     volumes:
+       - ./app:/app
+     depends_on:
+       minio:
+         condition: service_healthy
+
+volumes:
+  minio_data:
+  minio_config:
