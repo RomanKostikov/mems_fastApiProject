@@ -41,7 +41,10 @@
 
 ## Использование:
 
-1. Установите все зависимости, указанные в файле requirements.txt.
+1. Установите все зависимости, указанные в файле requirements.txt:
+```
+pip install -r requirements.txt 
+```
 2. Запустите проект с помощью docker-compose:
 ```
 docker-compose up -d
