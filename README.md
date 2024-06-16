@@ -60,6 +60,8 @@ http://localhost:8000/docs
 ```
 python upload_images.py --image_dir "sample_images" --csv_name "uploaded.csv" --csv_delimiter ";" --api_url "http://localhost:9000/images"
 ```
+6. Загрузите все изображения из minio в sqlite3 используя файл db.py(файлы пока только загружаются через web интерфейс);
+7. Следующий этап доработки использовать эту таблицу для запросов.
 
 ## Тестирование:
 
@@ -88,6 +90,8 @@ http://localhost:8000/docs
 ![4.PNG](4.PNG)
 
 ![5.PNG](5.PNG)
+
+![6.PNG](6.PNG)
 
 ## Errors:
 
